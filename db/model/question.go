@@ -8,7 +8,8 @@ import (
 	"github.com/jackc/pgx/v4"
 )
 
-func GetAllQuestions() {
+func GetQuestionById(questionId int) {
+	fmt.Println("Question Id:", questionId)
 	conn, err := pgx.Connect(context.Background(), os.Getenv("DB_URL"))
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
@@ -20,7 +21,7 @@ func GetAllQuestions() {
 
 	var id int
 	var question string
-	err = conn.QueryRow(context.Background(), "select * from questions where id=$1;", 1).Scan(&id, &question)
+	err = conn.QueryRow(context.Background(), "select * from questions where id=$1;", questionId).Scan(&id, &question)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "QueryRow failed: %v\n", err)
 		os.Exit(1)

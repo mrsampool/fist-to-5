@@ -1,7 +1,11 @@
 package controller
 
-import "github.com/mrsampool/fist-to-5/db/model"
-import "github.com/gin-gonic/gin"
+import (
+	"fmt"
+	"github.com/gin-gonic/gin"
+	"github.com/mrsampool/fist-to-5/db/model"
+	"strconv"
+)
 
 func GetCurrentQuestion(c *gin.Context) {
 	// TODO
@@ -9,6 +13,11 @@ func GetCurrentQuestion(c *gin.Context) {
 func NewQuestion(c *gin.Context) {
 	// TODO
 }
-func GetAllQuestions(c *gin.Context) {
-	model.GetAllQuestions()
+func GetQuestionById(c *gin.Context) {
+	questionIdParam := c.Param("questionId")
+	questionIdInt, err := strconv.Atoi(questionIdParam)
+	if err != nil {
+		fmt.Println("Received invalid question ID param")
+	}
+	model.GetQuestionById(questionIdInt)
 }
