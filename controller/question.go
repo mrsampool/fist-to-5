@@ -19,5 +19,6 @@ func GetQuestionById(c *gin.Context) {
 	if err != nil {
 		fmt.Println("Received invalid question ID param")
 	}
-	model.GetQuestionById(questionIdInt)
+	id, question := model.GetQuestionById(questionIdInt)
+	c.JSON(200, gin.H{"id": id, "question": question})
 }
