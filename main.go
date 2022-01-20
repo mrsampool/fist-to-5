@@ -6,5 +6,9 @@ import (
 
 func main() {
 	router := gin.Default()
-	router.Run()
+	SetRoutes(router)
+	err := router.Run(":3000")
+	if err != nil {
+		return
+	}
 }
