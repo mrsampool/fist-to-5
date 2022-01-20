@@ -9,6 +9,7 @@ func SetRoutes(router *gin.Engine) {
 	router.GET("/api/responses", controller.GetCurrentResponses)
 	router.POST("/api/responses/:questionId", controller.AddResponse)
 	router.GET("/api/responses/:questionId", controller.GetResponsesByQuestion)
-	router.GET("/api/question", controller.GetCurrentQuestion)
+	router.GET("/api/question/current", controller.GetCurrentQuestion)
+	router.GET("/api/question", controller.GetAllQuestions)
 	router.POST("/api/question", controller.NewQuestion)
 }
