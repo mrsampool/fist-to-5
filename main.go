@@ -8,7 +8,7 @@ func main() {
 	router := gin.Default()
 	SetEnv()
 	SetRoutes(router)
-	err := router.Run(":3000")
+	err := router.Run()
 	if err != nil {
 		return
 	}
