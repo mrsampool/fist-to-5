@@ -6,10 +6,19 @@ import (
 )
 
 func SetRoutes(router *gin.Engine) {
-	router.GET("/api/responses", controller.GetCurrentResponses)
-	router.POST("/api/responses/:questionId", controller.AddResponse)
-	router.GET("/api/responses/:questionId", controller.GetResponsesByQuestion)
-	router.GET("/api/question/current", controller.GetCurrentQuestion)
-	router.GET("/api/question/:questionId", controller.GetQuestionById)
-	router.POST("/api/question", controller.PostQuestion)
+	apiRouter := router.Group("/api")
+	{
+		responsesRouter := apiRouter.Group("/responses")
+		{
+			responsesRouter.GET("/", controller.GetCurrentResponses)
+			responsesRouter.POST("/:questionId", controller.AddResponse)
+			responsesRouter.GET("/:questionId", controller.GetResponsesByQuestion)
+		}
+		questionRouter := apiRouter.Group("/question")
+		{
+			questionRouter.GET("/current", controller.GetCurrentQuestion)
+			questionRouter.GET("/:questionId", controller.GetQuestionById)
+			questionRouter.POST("/", controller.PostQuestion)
+		}
+	}
 }
