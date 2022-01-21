@@ -11,5 +11,5 @@ func SetRoutes(router *gin.Engine) {
 	router.GET("/api/responses/:questionId", controller.GetResponsesByQuestion)
 	router.GET("/api/question/current", controller.GetCurrentQuestion)
 	router.GET("/api/question/:questionId", controller.GetQuestionById)
-	router.POST("/api/question", controller.NewQuestion)
+	router.POST("/api/question", controller.PostQuestion)
 }
