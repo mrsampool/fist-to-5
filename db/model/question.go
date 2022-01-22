@@ -1,13 +1,19 @@
 package model
 
 import (
-	"context"
+	"database/sql"
 	"fmt"
 )
 
 type Question struct {
-	Id           int    `json:"id"`
-	QuestionText string `json:"questionText"`
+	Id           int    //`json:"id"`
+	QuestionText string `db:"question_text"` //`json:"questionText"`
+}
+
+type Place struct {
+	Country       string
+	City          sql.NullString
+	TelephoneCode int `db:"telcode"`
 }
 
 var queries = map[string]string{
@@ -20,16 +26,26 @@ var id int
 var questionText string
 
 func QueryCurrentQuestion() (question Question, err error) {
-	conn := Connect()
-	err = conn.QueryRow(context.Background(), queries["getCurrent"]).Scan(&id, &questionText)
+	/*
+		conn := Connect()
+		err = conn.QueryRow(context.Background(), queries["getCurrent"]).Scan(&id, &questionText)
+		if err != nil {
+			fmt.Println("QueryRow failed: ", err)
+			return
+		}
+		defer conn.Close(context.Background())
+		return Question{id, questionText}, nil
+	*/
+	db := Open()
+	err = db.QueryRowx(queries["getCurrent"]).StructScan(&question)
 	if err != nil {
 		fmt.Println("QueryRow failed: ", err)
 		return
 	}
-	defer conn.Close(context.Background())
-	return Question{id, questionText}, nil
+	return
 }
 
+/*
 func QueryQuestionById(questionId int) (question Question, err error) {
 	conn := Connect()
 	err = conn.QueryRow(context.Background(), queries["getById"], questionId).Scan(&id, &questionText)
@@ -51,3 +67,5 @@ func InsertQuestion(text string) (question Question, err error) {
 	defer conn.Close(context.Background())
 	return Question{id, questionText}, err
 }
+
+*/
