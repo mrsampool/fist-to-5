@@ -7,8 +7,8 @@ import (
 )
 
 type Question struct {
-	Id           int    //`json:"id"`
-	QuestionText string `db:"question_text"` //`json:"questionText"`
+	Id           int    `db:"id" json:"id"`
+	QuestionText string `db:"question_text" json:"text"`
 }
 
 type Place struct {

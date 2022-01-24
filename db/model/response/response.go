@@ -7,14 +7,14 @@ import (
 	"github.com/mrsampool/fist-to-5/db/model"
 )
 
+type QuestionResponses struct {
+	Question  json.RawMessage `db:"question" json:"question"`
+	Responses []Response      `json:"responses"`
+}
 type QuestionResponsesRaw struct {
 	Question   json.RawMessage `db:"question"`
 	ResList    []Response
 	RawResList pq.StringArray `db:"responses"`
-}
-type QuestionResponses struct {
-	Question  json.RawMessage `db:"question"`
-	Responses []Response
 }
 type Response struct {
 	Id      int `db:"id" json:"id"`
