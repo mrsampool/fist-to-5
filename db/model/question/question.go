@@ -1,8 +1,9 @@
-package model
+package question
 
 import (
 	"database/sql"
 	"fmt"
+	"github.com/mrsampool/fist-to-5/db/model"
 )
 
 type Question struct {
@@ -16,18 +17,9 @@ type Place struct {
 	TelephoneCode int `db:"telcode"`
 }
 
-var queries = map[string]string{
-	"insert":     "INSERT INTO questions (question_text) VALUES ($1) RETURNING *;",
-	"getById":    "SELECT * FROM questions WHERE id=$1;",
-	"getCurrent": "SELECT * FROM questions ORDER BY id DESC LIMIT 1;",
-}
-
-var id int
-var questionText string
-
 func QueryCurrentQuestion() (question Question, err error) {
-	db := Open()
-	err = db.QueryRowx(queries["getCurrent"]).StructScan(&question)
+	db := model.Open()
+	err = db.QueryRowx(Queries["getCurrent"]).StructScan(&question)
 	if err != nil {
 		fmt.Println("QueryRow failed: ", err)
 		return
@@ -38,7 +30,7 @@ func QueryCurrentQuestion() (question Question, err error) {
 /*
 func QueryQuestionById(questionId int) (question Question, err error) {
 	conn := Connect()
-	err = conn.QueryRow(context.Background(), queries["getById"], questionId).Scan(&id, &questionText)
+	err = conn.QueryRow(context.Background(), Queries["getById"], questionId).Scan(&id, &questionText)
 	if err != nil {
 		fmt.Println("QueryRow failed: ", err)
 		return
@@ -49,7 +41,7 @@ func QueryQuestionById(questionId int) (question Question, err error) {
 
 func InsertQuestion(text string) (question Question, err error) {
 	conn := Connect()
-	err = conn.QueryRow(context.Background(), queries["insert"], text).Scan(&id, &questionText)
+	err = conn.QueryRow(context.Background(), Queries["insert"], text).Scan(&id, &questionText)
 	if err != nil {
 		fmt.Println("QueryRow failed: ", err)
 		return

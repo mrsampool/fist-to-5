@@ -3,7 +3,7 @@ package controller
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/mrsampool/fist-to-5/db/model"
+	"github.com/mrsampool/fist-to-5/db/model/question"
 	"net/http"
 )
 
@@ -12,7 +12,7 @@ type reqQuestion struct {
 }
 
 func GetCurrentQuestion(c *gin.Context) {
-	question, err := model.QueryCurrentQuestion()
+	question, err := question.QueryCurrentQuestion()
 	if err != nil {
 		fmt.Println("Error: ", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
