@@ -18,8 +18,13 @@ type QuestionResponses struct {
 }
 type Response struct {
 	Id      int `db:"id" json:"id"`
-	Value   int `db:"id" json:"value"`
+	Value   int `db:"value" json:"value"`
 	Student Student
+}
+type ResponseByQuestion struct {
+	Id        int `db:"response_id" json:"id"`
+	Value     int `db:"value" json:"value"`
+	StudentId int `db:"student_id" json:"studentId"`
 }
 type Student struct {
 	Id        int    `db:"id" json:"id"`
@@ -47,18 +52,22 @@ func QueryResponsesByCurrentQuestion() (responses QuestionResponses, err error) 
 	return
 }
 
-/*
-func QueryResponsesByQuestionById(questionId int) (question Question, err error) {
-	conn := Connect()
-	err = conn.QueryRow(context.Background(), responseQueries["getById"], questionId).Scan(&id, &questionText)
+func QueryResponsesByQuestionId(questionId int) (responses []ResponseByQuestion, err error) {
+	db := model.Open()
+	rows, err := db.Queryx(Queries["queryByQuestion"], questionId)
+	for rows.Next() {
+		var response ResponseByQuestion
+		err = rows.StructScan(&response)
+		responses = append(responses, response)
+	}
 	if err != nil {
 		fmt.Println("QueryRow failed: ", err)
 		return
 	}
-	defer conn.Close(context.Background())
-	return Question{id, questionText}, nil
+	return
 }
 
+/*
 func InsertResponse(text string) (question Question, err error) {
 	conn := Connect()
 	err = conn.QueryRow(context.Background(), responseQueries["insert"], text).Scan(&id, &questionText)

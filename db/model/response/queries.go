@@ -31,7 +31,7 @@ var Queries = map[string]string{
 				'value', value, 
 				'id', id
 			) FROM responses 
-			WHERE id=(SELECT id FROM current_question)
+			
 		) AS responses, 
 		(SELECT json_build_object(
 				'id', id, 

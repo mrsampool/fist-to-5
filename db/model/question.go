@@ -26,16 +26,6 @@ var id int
 var questionText string
 
 func QueryCurrentQuestion() (question Question, err error) {
-	/*
-		conn := Connect()
-		err = conn.QueryRow(context.Background(), queries["getCurrent"]).Scan(&id, &questionText)
-		if err != nil {
-			fmt.Println("QueryRow failed: ", err)
-			return
-		}
-		defer conn.Close(context.Background())
-		return Question{id, questionText}, nil
-	*/
 	db := Open()
 	err = db.QueryRowx(queries["getCurrent"]).StructScan(&question)
 	if err != nil {

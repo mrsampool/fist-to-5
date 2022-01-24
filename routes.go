@@ -10,9 +10,9 @@ func SetRoutes(router *gin.Engine) {
 	{
 		responsesRouter := apiRouter.Group("/responses")
 		{
-			responsesRouter.GET("/", controller.GetCurrentResponses)
 			responsesRouter.POST("/:questionId", controller.AddResponse)
 			responsesRouter.GET("/:questionId", controller.GetResponsesByQuestion)
+			responsesRouter.GET("/", controller.GetCurrentResponses)
 		}
 		questionRouter := apiRouter.Group("/question")
 		{
