@@ -7,34 +7,13 @@ import (
 	"github.com/mrsampool/fist-to-5/db/model"
 )
 
-type QuestionResponses struct {
-	Question  json.RawMessage `db:"question" json:"question"`
-	Responses []Response      `json:"responses"`
-}
-type QuestionResponsesRaw struct {
-	Question   json.RawMessage `db:"question"`
-	ResList    []Response
-	RawResList pq.StringArray `db:"responses"`
-}
-type Response struct {
-	Id      int `db:"id" json:"id"`
-	Value   int `db:"value" json:"value"`
-	Student Student
-}
-type ResponseByQuestion struct {
-	Id        int `db:"response_id" json:"id"`
-	Value     int `db:"value" json:"value"`
-	StudentId int `db:"student_id" json:"studentId"`
-}
-type Student struct {
-	Id        int    `db:"id" json:"id"`
-	FirstName string `db:"first_name" json:"first_name"`
-	LastName  string `db:"last_name" json:"last_name"`
-}
-
 func QueryResponsesByCurrentQuestion() (responses QuestionResponses, err error) {
 	db := model.Open()
-	var rawData QuestionResponsesRaw
+	var rawData struct {
+		Question   json.RawMessage `db:"question"`
+		ResList    []Response
+		RawResList pq.StringArray `db:"responses"`
+	}
 	err = db.Get(&rawData, Queries["queryCurrent"])
 	if err != nil {
 		fmt.Println("QueryRow failed: ", err)
@@ -67,15 +46,13 @@ func QueryResponsesByQuestionId(questionId int) (responses []ResponseByQuestion,
 	return
 }
 
-/*
-func InsertResponse(text string) (question Question, err error) {
-	conn := Connect()
-	err = conn.QueryRow(context.Background(), responseQueries["insert"], text).Scan(&id, &questionText)
+func InsertResponse(studentId, questionId, value int) (newResponse NewResponse, err error) {
+	db := model.Open()
+	err = db.Get(&newResponse, Queries["insert"], studentId, questionId, value)
 	if err != nil {
 		fmt.Println("QueryRow failed: ", err)
 		return
 	}
-	defer conn.Close(context.Background())
-	return Question{id, questionText}, err
+	fmt.Println(newResponse)
+	return newResponse, err
 }
-*/
