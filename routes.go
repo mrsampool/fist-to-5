@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/mandrigin/gin-spa/spa"
 	"github.com/mrsampool/fist-to-5/controller"
 )
 
@@ -21,5 +22,5 @@ func SetRoutes(router *gin.Engine) {
 			questionRouter.POST("/", controller.PostQuestion)
 		}
 	}
-
+	router.Use(spa.Middleware("/", "./client/public"))
 }
