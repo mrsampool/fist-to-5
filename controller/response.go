@@ -17,9 +17,9 @@ func AddResponse(c *gin.Context) {
 		return
 	}
 	var newResponse struct {
-		StudentId  int `json:"studentId"`
-		Value      int `json:"value"`
-		QuestionId int `json:"questionId"`
+		StudentId int `json:"studentId"`
+		Value     int `json:"value"`
+		// QuestionId int `json:"questionId"`
 	}
 	err = c.BindJSON(&newResponse)
 	if err != nil {
