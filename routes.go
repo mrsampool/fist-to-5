@@ -12,13 +12,14 @@ func SetRoutes(router *gin.Engine) {
 		{
 			responsesRouter.POST("/:questionId", controller.AddResponse)
 			responsesRouter.GET("/:questionId", controller.GetResponsesByQuestion)
-			responsesRouter.GET("/", controller.GetCurrentResponses)
+			responsesRouter.GET("/current", controller.GetCurrentResponses)
 		}
 		questionRouter := apiRouter.Group("/question")
 		{
-			questionRouter.GET("/current", controller.GetCurrentQuestion)
 			questionRouter.GET("/:questionId", controller.GetQuestionById)
+			questionRouter.GET("/current", controller.GetCurrentQuestion)
 			questionRouter.POST("/", controller.PostQuestion)
 		}
 	}
+
 }
