@@ -4,11 +4,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/lib/pq"
-	"github.com/mrsampool/fist-to-5/db/model"
+	"github.com/mrsampool/fist-to-5/db"
 )
 
 func QueryResponsesByCurrentQuestion() (responses QuestionResponses, err error) {
-	db := model.Open()
+	db := db.Open()
 	var rawData struct {
 		Question   json.RawMessage `db:"question"`
 		ResList    []Response
@@ -32,7 +32,7 @@ func QueryResponsesByCurrentQuestion() (responses QuestionResponses, err error) 
 }
 
 func QueryResponsesByQuestionId(questionId int) (responses []ResponseByQuestion, err error) {
-	db := model.Open()
+	db := db.Open()
 	rows, err := db.Queryx(Queries["queryByQuestion"], questionId)
 	for rows.Next() {
 		var response ResponseByQuestion
@@ -47,7 +47,7 @@ func QueryResponsesByQuestionId(questionId int) (responses []ResponseByQuestion,
 }
 
 func InsertResponse(studentId, questionId, value int) (newResponse NewResponse, err error) {
-	db := model.Open()
+	db := db.Open()
 	err = db.Get(&newResponse, Queries["insert"], studentId, questionId, value)
 	if err != nil {
 		fmt.Println("QueryRow failed: ", err)
