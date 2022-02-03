@@ -1,52 +1,18 @@
 <template>
   <div id="student-view-wrap">
     <h1>Teacher View</h1>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-import { getCurrentQuestion } from "../utils/serverUtils";
-
 export default {
-  name: 'StudentView',
-  data: function(){
-    return {
-      currStudent: { id: 1, firstName: 'Sam', lastName: 'Pool' },
-      currQuestion: null,
-      value: null
-    }
-  },
-  methods: {
-    postQuestion() {
-      if (this.currQuestion && this.currQuestion.id && this.value !== null ){
-        axios.post(`/api/responses/${this.currQuestion.id}`,
-            {
-              studentId: this.currStudent.id,
-              value: this.value,
-            })
-            .then(({data}) => {
-              this.currQuestion = '';
-            })
-      }
-    }
-  },
-  mounted: function() {
-    // getCurrentQuestion(this);
-  }
+  name: 'TeacherView'
 }
 </script>
 
 <style scoped>
-form{
-  width: fit-content;
-  background-color: var(--transparent-light);
-  border-radius: 1rem;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+
 label{
   display: flex;
   flex-direction: column;

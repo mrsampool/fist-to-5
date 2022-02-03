@@ -8,13 +8,12 @@ import (
 )
 
 func QueryResponsesByCurrentQuestion() (responses QuestionResponses, err error) {
-	db := db.Open()
+	conn := db.Open()
 	var rawData struct {
 		Question   json.RawMessage `db:"question"`
-		ResList    []Response
-		RawResList pq.StringArray `db:"responses"`
+		RawResList pq.StringArray  `db:"responses"`
 	}
-	err = db.Get(&rawData, Queries["queryCurrent"])
+	err = conn.Get(&rawData, Queries["queryCurrent"])
 	if err != nil {
 		fmt.Println("QueryRow failed: ", err)
 		return
@@ -28,12 +27,13 @@ func QueryResponsesByCurrentQuestion() (responses QuestionResponses, err error) 
 		}
 		responses.Responses = append(responses.Responses, processedResponse)
 	}
+	defer conn.Close()
 	return
 }
 
 func QueryResponsesByQuestionId(questionId int) (responses []ResponseByQuestion, err error) {
-	db := db.Open()
-	rows, err := db.Queryx(Queries["queryByQuestion"], questionId)
+	conn := db.Open()
+	rows, err := conn.Queryx(Queries["queryByQuestion"], questionId)
 	for rows.Next() {
 		var response ResponseByQuestion
 		err = rows.StructScan(&response)
@@ -43,16 +43,17 @@ func QueryResponsesByQuestionId(questionId int) (responses []ResponseByQuestion,
 		fmt.Println("QueryRow failed: ", err)
 		return
 	}
+	defer conn.Close()
 	return
 }
 
 func InsertResponse(studentId, questionId, value int) (newResponse NewResponse, err error) {
-	db := db.Open()
-	err = db.Get(&newResponse, Queries["insert"], studentId, questionId, value)
+	conn := db.Open()
+	err = conn.Get(&newResponse, Queries["insert"], studentId, questionId, value)
 	if err != nil {
 		fmt.Println("QueryRow failed: ", err)
 		return
 	}
-	fmt.Println(newResponse)
+	defer conn.Close()
 	return newResponse, err
 }

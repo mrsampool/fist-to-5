@@ -38,12 +38,22 @@ html{
 }
 button{
   padding: 1rem 2rem;
+  margin: 0.5rem;
   text-transform: uppercase;
-  background-color: white;
-  color: #2c3e50;
+  background-color: dodgerblue;
+  color: white;
   font-weight: bolder;
   font-size: 1.1rem;
   border-radius: 1rem;
   border: 0;
+}
+form, main{
+  width: fit-content;
+  background-color: var(--transparent-light);
+  border-radius: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>

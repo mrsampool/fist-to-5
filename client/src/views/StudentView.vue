@@ -1,7 +1,10 @@
 <template>
   <div id="student-view-wrap">
     <h1>Student View</h1>
-    <form v-if="currQuestion" @submit.prevent="submitResponse()">
+    <form
+        v-if="currQuestion"
+        @submit.prevent="submitResponse()"
+    >
       <h2>{{ currQuestion.text }}</h2>
       <div id="values-list">
         <label v-for="n in 6" :key="'option-'+n">
@@ -11,7 +14,12 @@
       </div>
       <button type="submit">Submit</button>
     </form>
-    <button type="submit" v-if="!currQuestion" @click="fetchQuestion">Get Next Question</button>
+    <button
+        type="submit"
+        v-if="!currQuestion"
+        @click="fetchQuestion"
+    >Get Next Question
+    </button>
   </div>
 </template>
 

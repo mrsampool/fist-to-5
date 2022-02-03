@@ -1,8 +1,26 @@
 import axios from "axios";
 
-export function getCurrentQuestion(component){
+export function getCurrentQuestion(){
   return new Promise((resolve, reject) => {
     axios.get(`/api/question/current`)
+      .then(({data}) => resolve(data))
+      .catch(err => reject(err));
+  });
+}
+
+export function postQuestion(text){
+  return new Promise((resolve, reject) => {
+    if (text) {
+      axios.post(`/api/question/`, { text })
+        .then(() => resolve())
+        .catch(err => reject(err))
+    }
+  });
+}
+
+export function getCurrentResponses(){
+  return new Promise((resolve, reject) => {
+    axios.get(`/api/responses/current`)
       .then(({data}) => resolve(data))
       .catch(err => reject(err));
   });
@@ -19,5 +37,5 @@ export function postResponse(currQuestion, currStudent, value) {
         .then(() => resolve())
         .catch(err => reject(err))
     }
-  })
+  });
 }
