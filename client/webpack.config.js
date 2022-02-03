@@ -21,7 +21,7 @@ module.exports = (env) => ({
             },
             progress: true,
         },
-        // historyApiFallback: true,
+        historyApiFallback: { index: 'index.html' },
         open: true,
         proxy: {
             '/api/*': {

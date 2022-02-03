@@ -1,7 +1,7 @@
 <template>
   <div id="student-view-wrap">
     <h1>Student View</h1>
-    <form v-if="currQuestion" @submit.prevent="postQuestion">
+    <form v-if="currQuestion" @submit.prevent="submitResponse()">
       <h2>{{ currQuestion.text }}</h2>
       <div id="values-list">
         <label v-for="n in 6" :key="'option-'+n">
@@ -16,7 +16,8 @@
 </template>
 
 <script>
-import axios from 'axios';
+import {getCurrentQuestion, postResponse} from "../utils/serverUtils";
+
 export default {
   name: 'StudentView',
   data: function(){
@@ -28,26 +29,18 @@ export default {
   },
   methods: {
     fetchQuestion() {
-      axios.get(`/api/question/current`).then(({data}) => {
-        this.currQuestion = data;
-      });
+      getCurrentQuestion()
+        .then((question) => this.currQuestion = question)
+        .catch(err => console.log(err))
     },
-    postQuestion() {
-      if (this.currQuestion && this.currQuestion.id && this.value !== null ){
-        axios.post(`/api/responses/${this.currQuestion.id}`,
-            {
-              studentId: this.currStudent.id,
-              value: this.value,
-            })
-            .then(({data}) => {
-              console.log(data);
-              this.currQuestion = '';
-            })
-      }
+    submitResponse() {
+      postResponse(this.currQuestion, this.currStudent, this.value)
+        .then(() => this.currQuestion = '')
+        .catch(err => console.log(err))
     }
   },
   mounted: function() {
-    this.fetchQuestion()
+    getCurrentQuestion(this)
   }
 }
 </script>
