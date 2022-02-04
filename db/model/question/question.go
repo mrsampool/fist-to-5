@@ -7,7 +7,7 @@ import (
 
 func QueryCurrentQuestion() (question Question, err error) {
 	conn := db.Open()
-	err = conn.QueryRowx(Queries["getCurrent"]).StructScan(&question)
+	err = conn.QueryRowx(Queries["queryCurrent"]).StructScan(&question)
 	if err != nil {
 		fmt.Println("QueryRow failed: ", err)
 		return

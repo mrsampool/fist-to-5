@@ -2,18 +2,28 @@
   <!--<img alt="Vue logo" src="./assets/logo.png">-->
   <!--<HelloWorld msg="Welcome to Your Vue.js App"/>-->
   <!--<StudentView />-->
+  <top-nav v-bind:mode="this.mode"></top-nav>
   <router-view></router-view>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
 import StudentView from './views/StudentView';
+import TopNav from "./components/TopNav";
 
 export default {
   name: 'App',
-  components: {
-    // HelloWorld,
-    StudentView
+  components: {TopNav},
+  computed: {
+    mode: function(){
+      if (this.$route.fullPath.indexOf('teacher') !== -1){
+        return 'teacher';
+      } else if (this.$route.fullPath.indexOf('student') !== -1) {
+        return 'student';
+      } else {
+        return null;
+      }
+    }
   }
 }
 </script>
@@ -35,6 +45,9 @@ html, button, label, h1, h2{
 html{
   background-color: lightblue;
   --transparent-light: hsla(0, 0%, 100%, 0.5)
+}
+body{
+  margin: 0;
 }
 button{
   padding: 1rem 2rem;

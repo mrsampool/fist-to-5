@@ -4,7 +4,7 @@
     <textarea v-model="newQuestion"></textarea>
     <button>Submit</button>
   </form>
-  <router-link to="/responses">
+  <router-link to="/teacher/responses">
     <button>Previous Responses</button>
   </router-link>
 </template>

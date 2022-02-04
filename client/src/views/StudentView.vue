@@ -48,7 +48,7 @@ export default {
     }
   },
   mounted: function() {
-    getCurrentQuestion(this)
+    this.fetchQuestion()
   }
 }
 </script>

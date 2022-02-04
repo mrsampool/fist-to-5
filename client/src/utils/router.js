@@ -12,7 +12,7 @@ export const router = [
     path: '/teacher',
     component: TeacherView,
     children: [
-      { path: 'ask', component: Ask },
+      { path: '', component: Ask },
       { path: 'responses', component: Responses }
     ]
   },
