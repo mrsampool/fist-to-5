@@ -27,6 +27,7 @@ nav{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1rem;
 }
 nav span{
   padding: 1rem;

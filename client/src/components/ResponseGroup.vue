@@ -1,7 +1,8 @@
 <template>
   <li class="response-group">
-    <span class="response-group-value">
-      {{ group.value }} ({{ group.percent }})
+    <span class="response-group-numbers">
+      <p class="value">{{ group.value }}</p>
+      <p>{{ group.percent }}</p>
     </span>
     <span>
       <ul>
@@ -30,8 +31,18 @@ export default {
   display: flex;
   flex-direction: row;
 }
-.response-group-value{
+.response-group-numbers{
   font-weight: bold;
+  display: block;
+}
+.response-group-numbers .value{
+  background-color: dodgerblue;
+  border-radius: 1rem;
+  color: white;
+  margin-bottom: 0.1rem;
+}
+.response-group-numbers p{
+  margin: 0;
 }
 .response-name{
   list-style-type: circle;

@@ -1,5 +1,4 @@
 <template>
-  <h2>Responses</h2>
   <main>
     <h3>{{ question.text }}</h3>
     <ul>
@@ -41,7 +40,7 @@ export default {
       });
       Object.values(groups).forEach(group => {
         group.percent = `${
-            ((100 / this.responses.length) * group.responses.length).toFixed(2)
+            ((100 / this.responses.length) * group.responses.length).toFixed(0)
         }%`;
       })
       return groups;

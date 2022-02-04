@@ -1,6 +1,5 @@
 <template>
   <div id="student-view-wrap">
-    <h1>Teacher View</h1>
     <router-view></router-view>
   </div>
 </template>

@@ -1,7 +1,4 @@
 <template>
-  <!--<img alt="Vue logo" src="./assets/logo.png">-->
-  <!--<HelloWorld msg="Welcome to Your Vue.js App"/>-->
-  <!--<StudentView />-->
   <top-nav v-bind:mode="this.mode"></top-nav>
   <router-view></router-view>
 </template>

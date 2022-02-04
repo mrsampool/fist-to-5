@@ -1,11 +1,10 @@
 <template>
   <div id="student-view-wrap">
-    <h1>Student View</h1>
     <form
         v-if="currQuestion"
         @submit.prevent="submitResponse()"
     >
-      <h2>{{ currQuestion.text }}</h2>
+      <h1>{{ currQuestion.text }}</h1>
       <div id="values-list">
         <label v-for="n in 6" :key="'option-'+n">
           {{  !(n - 1) ? 'fist' : n - 1  }}
