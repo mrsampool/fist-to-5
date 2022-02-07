@@ -10,7 +10,7 @@ import TopNav from "./components/TopNav";
 
 export default {
   name: 'App',
-  components: {TopNav},
+  // components: [TopNav],
   computed: {
     mode: function(){
       if (this.$route.fullPath.indexOf('teacher') !== -1){

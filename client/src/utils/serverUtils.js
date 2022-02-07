@@ -11,7 +11,7 @@ export function getCurrentQuestion(){
 export function postQuestion(text){
   return new Promise((resolve, reject) => {
     if (text) {
-      axios.post(`/api/question/`, { text })
+      axios.post(`/api/question`, { text })
         .then(() => resolve())
         .catch(err => reject(err))
     }
