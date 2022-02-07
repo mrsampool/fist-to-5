@@ -1,8 +1,9 @@
 jest.mock('axios');
 const axios = require('axios');
-const {getCurrentQuestion, postQuestion} = require("./serverUtils");
+const {getCurrentQuestion} = require("./serverUtils");
 
-
+axios.post
+  .mockImplementation((url, data) => new Promise((resolve) => resolve({ url, data })));
 
 describe('getCurrentQuestion', () => {
   it('should send an axios GET request to the correct endpoint', () => {
@@ -21,19 +22,17 @@ describe('getCurrentQuestion', () => {
 });
 
 describe('postQuestion', () => {
-  it('should send an axios POST request to the correct endpoint', () => {
-    let actualUrl, actualData;
-    axios.post.mockImplementation((url, data) => {
+  it('should send a POST request to the current endpoint', () => {
+    let actualUrl;
+    let expectedUrl = `/api/question/current`;
+    axios.get.mockImplementation((urlParam) => {
       return new Promise((resolve) => {
-        actualUrl = url;
-        actualData = data;
-        resolve({data: null});
+        expectedUrl = urlParam;
+        resolve();
       });
     });
-    const inputQuestion = 'Input Question';
-    const expectedUrl = '/api/question'
-    postQuestion(inputQuestion).then(() => {
-      expect(actualUrl).toBe(expectedUrl)
-    })
+    getCurrentQuestion().then(()=>{
+      expect(actualUrl).toBe(expectedUrl);
+    });
   })
 })
