@@ -6,9 +6,9 @@
     >
       <h1>{{ currQuestion.text }}</h1>
       <div id="values-list">
-        <label v-for="n in 6" :key="'option-'+n">
+        <label v-for="n in 6" :key="'option-'+ n">
           {{  !(n - 1) ? 'fist' : n - 1  }}
-          <input type="radio" v-bind:value="n - 1" v-model="value">
+          <input type="radio" v-bind:value="n - 1" v-model="value" :id="'radio-' + (n - 1)">
         </label>
       </div>
       <button type="submit">Submit</button>

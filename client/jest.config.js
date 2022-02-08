@@ -4,6 +4,41 @@
  */
 
 module.exports = {
+
+  // A preset that is used as a base for Jest's configuration
+  preset: '@vue/cli-plugin-unit-jest',
+
+  // The test environment that will be used for testing
+  testEnvironment: "jsdom",
+
+  // An array of file extensions your modules use
+  moduleFileExtensions: [
+    "js",
+    "vue",
+    "jsx",
+    "ts",
+    "tsx",
+    "json",
+    "node"
+  ],
+
+  // A map from regular expressions to paths to transformers
+  transform: {
+    "^.+\\.vue$": "vue3-jest",
+    "^.+\\js$": "babel-jest"
+  },
+
+  // Indicates whether the coverage information should be collected while executing the test
+  collectCoverage: true,
+
+  // The directory where Jest should output its coverage files
+  coverageDirectory: "coverage",
+
+  // Indicates which provider should be used to instrument code for coverage
+  coverageProvider: "v8",
+
+  // ---------- //
+
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
@@ -16,22 +51,13 @@ module.exports = {
   // Automatically clear mock calls, instances and results before every test
   // clearMocks: false,
 
-  // Indicates whether the coverage information should be collected while executing the test
-  collectCoverage: true,
-
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   // collectCoverageFrom: undefined,
-
-  // The directory where Jest should output its coverage files
-  coverageDirectory: "coverage",
 
   // An array of regexp pattern strings used to skip coverage collection
   // coveragePathIgnorePatterns: [
   //   "/node_modules/"
   // ],
-
-  // Indicates which provider should be used to instrument code for coverage
-  coverageProvider: "v8",
 
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [
@@ -70,16 +96,6 @@ module.exports = {
   //   "node_modules"
   // ],
 
-  // An array of file extensions your modules use
-  // moduleFileExtensions: [
-  //   "js",
-  //   "jsx",
-  //   "ts",
-  //   "tsx",
-  //   "json",
-  //   "node"
-  // ],
-
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   // moduleNameMapper: {},
 
@@ -91,9 +107,6 @@ module.exports = {
 
   // An enum that specifies notification mode. Requires { notify: true }
   // notifyMode: "failure-change",
-
-  // A preset that is used as a base for Jest's configuration
-  // preset: undefined,
 
   // Run tests from one or more projects
   // projects: undefined,
@@ -136,9 +149,6 @@ module.exports = {
   // A list of paths to snapshot serializer modules Jest should use for snapshot testing
   // snapshotSerializers: [],
 
-  // The test environment that will be used for testing
-  testEnvironment: "jsdom",
-
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
 
@@ -170,9 +180,6 @@ module.exports = {
 
   // Setting this value to "fake" allows the use of fake timers for functions such as "setTimeout"
   // timers: "real",
-
-  // A map from regular expressions to paths to transformers
-  // transform: undefined,
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   // transformIgnorePatterns: [
