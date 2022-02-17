@@ -1,12 +1,14 @@
 <template>
-  <form @submit.prevent="submitQuestion()">
-    <h2>Ask New Question</h2>
-    <textarea v-model="newQuestion"></textarea>
-    <button>Submit</button>
-  </form>
-  <router-link to="/teacher/responses">
-    <button>Previous Responses</button>
-  </router-link>
+  <div>
+    <form @submit.prevent="submitQuestion()">
+      <h2>Ask New Question</h2>
+      <textarea v-model="newQuestion"></textarea>
+      <button type="submit">Submit</button>
+    </form>
+    <router-link to="/teacher/responses">
+      <button>Previous Responses</button>
+    </router-link>
+  </div>
 </template>
 
 <script>
@@ -27,7 +29,13 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 textarea{
   display: block;
   width: 20rem;

@@ -7,7 +7,9 @@
     "build": "webpack --config webpack.config.js",
     "dev-build": "webpack --config webpack.config.js -w",
     "dev-client": "webpack serve",
-    "test": "jest"
+    "test": "jest",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "author": "Sam Pool",
   "license": "ISC",
@@ -26,14 +28,21 @@
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
+    "@storybook/addon-actions": "^6.4.19",
+    "@storybook/addon-essentials": "^6.4.19",
+    "@storybook/addon-links": "^6.4.19",
+    "@storybook/builder-webpack5": "^6.4.19",
+    "@storybook/manager-webpack5": "^6.4.19",
+    "@storybook/vue3": "^6.4.19",
     "@vue/cli-plugin-unit-jest": "^4.5.15",
     "@vue/compiler-sfc": "^3.2.30",
     "@vue/test-utils": "^2.0.0-rc.18",
     "babel-jest": "^27.5.1",
     "jest": "^27.5.0",
-    "vue-loader": "^17.0.0",
+    "storybook-addon-mock": "^2.3.0",
+    "vue-loader": "^16.8.3",
     "vue3-jest": "^27.0.0-alpha.1",
-    "webpack": "^5.68.0",
+    "webpack": "^5.69.1",
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.7.4"
   }

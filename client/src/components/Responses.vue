@@ -1,16 +1,18 @@
 <template>
-  <main>
-    <h3>{{ question.text }}</h3>
-    <ul>
-      <response-group
-          v-for="group in responseGroups"
-          v-bind:group="group">
-      </response-group>
-    </ul>
-  </main>
-  <router-link to="/ask">
-    <button>New Question</button>
-  </router-link>
+  <div>
+    <main>
+      <h3>{{ question.text }}</h3>
+      <ul>
+        <response-group
+            v-for="group in responseGroups"
+            v-bind:group="group">
+        </response-group>
+      </ul>
+    </main>
+    <router-link to="/ask">
+      <button>New Question</button>
+    </router-link>
+  </div>
 </template>
 
 <script>
